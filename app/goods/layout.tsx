@@ -1,4 +1,3 @@
-import '@/app/ui/goods/goods.module.css'
 import Aside from '@/app/ui/goods/aside'
 
 export default function layout({ children }: { children: React.ReactNode }) {
