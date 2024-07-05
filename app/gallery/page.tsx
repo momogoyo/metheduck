@@ -1,31 +1,53 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import styles from '@/app/ui/gallery/gallery.module.css'
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 
 export default function Page() {
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState<string[]>([])
+  const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [hasMore, setHasMore] = useState(false)
+  const PAGESIZE = 20
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const response = await fetch('/api/images')
-        if (!response.ok) {
-          throw new Error(`HTTP error ${response.status}`)
-        }
+  const fetchImages = useCallback(async (page: number) => {
+    setLoading(true)
 
-        const data = await response.json()
-        setImages(data)
-      } catch (error) {
-        console.error('Error fetching images:', error)
+    try {
+      const response = await fetch(`/api/images?page=${page}&pageSize=${PAGESIZE}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`)
       }
-    }
 
-    fetchImages()
+      const data = await response.json()
+      setImages((prevImages) => [...prevImages, ...data.images])
+      setHasMore(page < data.totalPages)
+      setLoading(false)
+    } catch (error) {
+      console.error(`Error fetching /api/images: ${error}`)
+      setLoading(false)
+    }
   }, [])
 
+  const handleScroll = useCallback(() => {
+    const scrollHeight = document.documentElement.scrollHeight - 500
+
+    if (window.innerHeight + window.scrollY >= scrollHeight && !loading && hasMore) {
+      setPage((prevPage) => prevPage + 1)
+    }
+  }, [loading, hasMore])
+
+  useEffect(() => {
+    fetchImages(page)
+  }, [page, fetchImages])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  })
 
   return (
     <div className={styles.wrapper}>
@@ -42,6 +64,8 @@ export default function Page() {
             </CardContent>
           </Card>
         ))}
+
+        {loading && <p>Loading..</p>}
       </div>
     </div>
   )
