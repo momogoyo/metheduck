@@ -1,66 +1,69 @@
 'use client'
 
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from '@/app/ui/gallery/gallery.module.css'
 import Image from 'next/image'
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { Card, CardContent } from '@/components/ui/card'
 
 export default function Page() {
-  const elementRef = useRef(null)
+  const [data, setData] = useState<string[]>([])
+  const [hasMore, setHasMore] = useState(false)
+  const [hasError, setHasError] = useState(false)
+  const [targetRef, isIntersecting] = useIntersectionObserver({ threshold: 1 })
 
-  const [images, setImages] = useState<string[]>([])
-  const [page, setPage] = useState(1)
-  const [hasMore, setHasMore] = useState(true)
-  const PAGESIZE = 20
+  const pageRef = useRef(1)
 
-  const fetchImages = async () => {
+  const fetchImages = async ({ page }: { page: number }) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500))
-
-      const response = await fetch(`/api/images?page=${page}&pageSize=${PAGESIZE}`)
+      const response = await fetch(`/api/images?page=${page}&pageSize=20`)
+      
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`)
       }
 
       const data = await response.json()
+      if (data.images) {
+        setData((prev) => {
+          const newData = [...prev, data.images]
 
-      setImages((prevImages) => [...prevImages, ...data.images])
-      setPage((prevPage) => prevPage + 1)
-      setHasMore(page < data.totalPages)
-      
-      console.log(hasMore, page, images)
-    } catch (error) {
-      console.error(`Error fetching /api/images: ${error}`)
+          if (newData.length < data.totalImages) {
+            setHasMore(true)
+          } else {
+            setHasMore(false)
+          }
+
+          return newData[0]
+        })
+      } else {
+        setHasMore(false)
+      }
+    } catch(error) {
       setHasMore(false)
-    }
-  }
-
-  const onIntersection = (entries: IntersectionObserverEntry[]) => {
-    const entry = entries[0]
-    
-    if (entry.isIntersecting && hasMore) {
-      fetchImages()
+      setHasError(true)
     }
   }
 
   useEffect(() => {
-    const observer = new IntersectionObserver(onIntersection)
-
-    if (observer && elementRef.current) {
-      observer.observe(elementRef.current)
-    }
-
-    return () => {
-      if (observer) {
-        observer.disconnect()
-      }
-    }
+    fetchImages({
+      page: pageRef.current
+    })
   }, [])
 
+  useEffect(() => {
+    if (hasMore && isIntersecting) {
+      pageRef.current += 1
+      
+      fetchImages({
+        page: pageRef.current
+      })
+    }
+  }, [isIntersecting, hasMore])
+
   return (
-    <div ref={elementRef} className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <div className={styles.gallery}>
-        {images.map((src, index) => (
+        {data.map((src, index) => (
           <Card key={index}>
             <CardContent>
               <Image
@@ -72,8 +75,6 @@ export default function Page() {
             </CardContent>
           </Card>
         ))}
-
-        {hasMore && <p>Loading..</p>}
       </div>
     </div>
   )
