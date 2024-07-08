@@ -1,4 +1,4 @@
-import Aside from '@/app/ui/goods/aside'
+import Aside from '@/app/ui/Aside'
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (

@@ -1,5 +1,5 @@
 import Logo from '@/app/ui/logo'
-import Nav from '@/app/ui/info/nav-links'
+import Gnb from '@/app/ui/Gnb'
 
 export default function gnb() {
   return (
@@ -7,7 +7,7 @@ export default function gnb() {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="mr-4 hidden md:flex">
           <Logo />
-          <Nav />
+          <Gnb />
         </div>
       </div>
     </header>

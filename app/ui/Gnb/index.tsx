@@ -15,7 +15,7 @@ const links = [
   { name: 'Goods', href: '/goods' },
 ]
 
-export default function NavLinks() {
+export default function Gnb() {
   return (
     <NavigationMenu>
       <NavigationMenuList>

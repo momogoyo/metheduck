@@ -13,7 +13,13 @@ export async function GET (request: NextRequest) {
   const imagesDir = path.join(process.cwd(), 'public', 'images')
   const fileNames = fs.readdirSync(imagesDir)
   const imageFiles = fileNames.filter((file) => /\.(png|jpg|PNG|JPG|jpeg|gif|svg)$/.test(file))
-  const images = imageFiles.map((fileName) => `/images/${fileName}`)
+  const images = imageFiles.map((fileName, index) => {
+    return {
+      id: index,
+      url: `/images/${fileName}`,
+      title: fileName
+    }
+  })
 
   const totalImages = images.length
   const totalPages = Math.ceil(totalImages / pageSize)

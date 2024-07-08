@@ -6,7 +6,7 @@ import {
 
 export const useIntersectionObserver = (options?: IntersectionObserverInit) => {
   const [isIntersecting, setIsIntersecting] = useState(false)
-  const targetRef = useRef(null)
+  const targetRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
