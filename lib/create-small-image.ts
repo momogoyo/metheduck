@@ -31,7 +31,7 @@ fs.readdir(inputDir, async (error: NodeJS.ErrnoException | null,  files: string[
   
   for (const file of imageFiles) {
     const inputPath = path.join(inputDir, file)
-    const outputPath = path.join(outputDir, path.basename(file, path.extname(file)) + '-small' + path.extname(file))
+    const outputPath = path.join(outputDir, path.basename(file, path.extname(file)) + path.extname(file))
     
     try {
       await createSmallImage(inputPath, outputPath)
