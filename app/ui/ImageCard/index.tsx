@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 
 interface Card {
   url: string
@@ -11,16 +10,18 @@ export default function ImageCard ({
   title
 }: Card) {
   return (
-    <Card>
-      <CardContent>
-        <Image
+    <Card className="flex flex-col space-y-3 max-w-lg	w-full overflow-hidden">
+      <div 
+        className={`blured bg-no-repeat bg-cover`}
+        style={{ backgroundImage: `url('/small/${title}')` }}
+      >
+        <img
           src={url}
           alt={title}
-          width={250}
-          height={500}
-          />
-      </CardContent>
-      <CardTitle>{title}</CardTitle>
+          className="w-full aspect-square block opacity-0"
+          loading="lazy"
+        />
+      </div>
     </Card>
   )
 }
