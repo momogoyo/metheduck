@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES6",
+    "module": "commonjs",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "preserveValueImports": false,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -29,7 +31,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/pages/placeholder-data.ts",
-    "scripts/seed.js"
+    "scripts/seed.js",
+    "./src"
   ],
   "exclude": ["node_modules"]
 }
