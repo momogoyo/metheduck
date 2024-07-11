@@ -1,3 +1,4 @@
+import styles from './imagecard.module.css'
 import { Card } from '@/components/ui/card'
 
 interface Card {
@@ -12,7 +13,7 @@ export default function ImageCard ({
   return (
     <Card className="flex flex-col space-y-3 max-w-lg	w-full overflow-hidden">
       <div 
-        className={`blured bg-no-repeat bg-cover`}
+        className={`${styles.blured} bg-no-repeat bg-cover`}
         style={{ backgroundImage: `url('/small/${title}')` }}
       >
         <img

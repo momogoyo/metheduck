@@ -1,0 +1,11 @@
+.blured {
+  filter: blur(10px);
+}
+
+.blured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-color: #FFFFFF;
+}

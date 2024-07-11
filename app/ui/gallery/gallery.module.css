@@ -8,15 +8,3 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 16px;
 }
-
-.blured {
-  filter: blur(10px);
-}
-
-.blured::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  background-color: #FFFFFF;
-}
