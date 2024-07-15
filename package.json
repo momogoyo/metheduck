@@ -5,7 +5,7 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
-    "ffmpeg": "ts-node lib/create-small-image.ts"
+    "ffmpeg": "ts-node scripts/create-small-image.ts"
   },
   "dependencies": {
     "@radix-ui/react-navigation-menu": "^1.2.0",

@@ -1,5 +1,5 @@
 import '@/app/ui/global.css'
-import { cn } from '@/lib/utils'
+import { cn } from '@/scripts/utils'
 import { fontSans } from '@/app/ui/fonts'
 import Header from '@/app/ui/Header'
 

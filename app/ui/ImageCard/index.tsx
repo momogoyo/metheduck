@@ -1,5 +1,7 @@
-import styles from './imagecard.module.css'
+import './styles.css'
+import { useRef, useState } from 'react'
 import { Card } from '@/components/ui/card'
+import { cn } from '@/scripts/utils'
 
 interface Card {
   url: string
@@ -10,16 +12,27 @@ export default function ImageCard ({
   url,
   title
 }: Card) {
+  const [isLoad, setIsLoad] = useState(false)
+  const imageRef = useRef<HTMLImageElement | null>(null)
+
+  const onLoad = () => {
+    if (imageRef.current?.complete) {
+      setIsLoad(true)
+    }
+  }
+
   return (
     <Card className="flex flex-col space-y-3 max-w-lg	w-full overflow-hidden">
-      <div 
-        className={`${styles.blured} bg-no-repeat bg-cover`}
+      <div
+        className={cn('blured', 'bg-no-repeat', 'bg-cover', { 'loaded': isLoad })}
         style={{ backgroundImage: `url('/small/${title}')` }}
       >
         <img
+          onLoad={onLoad}
+          ref={imageRef}
           src={url}
           alt={title}
-          className="w-full aspect-square block opacity-0"
+          className={cn('w-full', 'aspect-square', 'block', 'opacity-0')}
           loading="lazy"
         />
       </div>

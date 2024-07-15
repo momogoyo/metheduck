@@ -1,0 +1,34 @@
+.blured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-color: #FFFFFF;
+  animation: pulse 2.5s infinite;
+}
+
+.blurred img {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.blured.loaded::before {
+  content: none;
+  animation: none;
+}
+
+.blured.loaded img {
+  opacity: 1;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
