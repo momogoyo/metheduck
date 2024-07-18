@@ -1,7 +1,8 @@
-import './styles.css'
+import styles from './ImageGallery.module.css'
 import { useRef, useState } from 'react'
-import { Card } from '@/components/ui/card'
 import { cn } from '@/scripts/utils'
+
+import { Card } from '@/components/ui/card'
 
 interface Card {
   url: string
@@ -17,22 +18,28 @@ export default function ImageCard ({
 
   const onLoad = () => {
     if (imageRef.current?.complete) {
-      setIsLoad(true)
+      setTimeout(() => {
+
+        setIsLoad(true)
+      }, 250)
     }
   }
 
   return (
-    <Card className="flex flex-col space-y-3 max-w-lg	w-full overflow-hidden">
-      <div
-        className={cn('blured', 'bg-no-repeat', 'bg-cover', { 'loaded': isLoad })}
-        style={{ backgroundImage: `url('/small/${title}')` }}
-      >
+    <Card className={cn('flex', 'flex-col', 'space-y-3', 'max-w-lg', 'w-full', 'overflow-hidden')}>
+      <div className={cn(styles.box, { [styles.pixel]: !isLoad })}>
+        <img
+          src={`/small/${title}`}
+          alt={title}
+          className={cn(styles.small, 'w-full', 'aspect-square', 'block', { [styles.hidden]: isLoad })}
+          loading="lazy"
+        />
         <img
           onLoad={onLoad}
           ref={imageRef}
           src={url}
           alt={title}
-          className={cn('w-full', 'aspect-square', 'block', 'opacity-0')}
+          className={cn(styles.original, 'w-full', 'aspect-square', 'block', { [styles.visible]: isLoad })}
           loading="lazy"
         />
       </div>

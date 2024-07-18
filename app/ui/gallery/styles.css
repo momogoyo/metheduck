@@ -8,3 +8,42 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 16px;
 }
+
+
+
+
+/* .box {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  background-color: #000000;
+}
+
+.box img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.box.pixel img {
+  image-rendering: pixelated;
+  filter: contrast(1.4);
+}
+
+.box.pixel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(0deg, #00000006 0%, #00000006 4%, transparent 4%, transparent 96%, #00000006 96%, #00000006 100%),
+    repeating-linear-gradient(90deg, #00000006 0%, #00000006 4%, transparent 4%, transparent 96%, #00000006 96%, #00000006 100%);
+  background-size: 10px 10px; 
+  z-index: 2;
+} */

@@ -2,7 +2,7 @@ import ffmpeg from 'fluent-ffmpeg'
 import fs from 'fs-extra'
 import path from 'path'
 
-const inputDir = path.join(process.cwd(), 'public/images')
+const inputDir = path.join(process.cwd(), 'public/compress')
 const outputDir = path.join(process.cwd(), 'public/small')
 
 // public/small 폴더가 없을 경우 생성
@@ -13,7 +13,7 @@ const createSmallImage = (inputPath: string, outputPath: string): Promise<void> 
   return new Promise((resolve, reject) => {
     ffmpeg(inputPath)
       .output(outputPath)
-      .videoFilter('scale=20:-1') // small 이미지 크기 설정 (가로: 20px / 세로: 비율에 맞게)
+      .videoFilter('scale=80:-1') // small 이미지 크기 설정 (가로: 20px / 세로: 비율에 맞게)
       .on('end', resolve)
       .on('error', reject)
       .run()

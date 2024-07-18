@@ -10,6 +10,8 @@ import { cn } from '@/scripts/utils'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import ImageCard from '@/app/ui/ImageCard'
 
+// import { Card } from '@/components/ui/card'
+
 type ImageProps = {
   id: number
   url: string
@@ -79,6 +81,14 @@ export default function Page() {
 
   return (
     <div className={cn('wrapper')}>
+      {/* <div className={cn('box')}>
+        <img src="compress/IMG_01.JPG" alt="image" />
+      </div>
+
+      <div className={cn('box', 'pixel')}>
+        <img src="small/IMG_01.JPG" alt="pixel image" />
+      </div> */}
+
       {isError ? (
         <div>Error...</div>
       ) : isInitialFetch ? (
