@@ -1,17 +1,22 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import styles from '@/app/ui/gallery/gallery.module.css'
+import '@/app/ui/gallery/styles.css'
+import {
+  useState,
+  useEffect,
+  useRef
+} from 'react'
+import { cn } from '@/scripts/utils'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import ImageCard from '@/app/ui/ImageCard'
 
-interface ImageProps  {
-  id: number,
-  url: string,
-  title: string,
+type ImageProps = {
+  id: number
+  url: string
+  title: string
 }
 
-interface FetchOptions {
+type FetchOptions  = {
   page?: number
 }
 
@@ -24,7 +29,7 @@ export default function Page() {
 
   const [targetRef, isIntersecting] = useIntersectionObserver({ threshold: 1 })
 
-  const fetchImages = async ({ 
+  const fetchImages = async ({
     page
   }: FetchOptions) => {
     try {
@@ -40,7 +45,6 @@ export default function Page() {
       if (data.images) {
         setImages((prev) => {
           const newData = [...prev, ...data.images]
-          console.log(newData)
 
           if (newData.length < data.totalImages) {
             setHasMore(true)
@@ -74,16 +78,16 @@ export default function Page() {
   }, [isIntersecting, hasMore])
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cn('wrapper')}>
       {isError ? (
         <div>Error...</div>
       ) : isInitialFetch ? (
         <div>Loading...</div>
       ) : (
-        <div className={styles.gallery}>
-          {images.map(({ id, title, url })  => (
+        <div className={cn('gallery')}>
+          {images.map(({ title, url }, index)  => (
             <ImageCard
-              key={id}
+              key={index}
               url={url}
               title={title}
             />
