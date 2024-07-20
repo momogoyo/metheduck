@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/scripts/utils'
 
-interface Card {
+type CardProps = {
   url: string
   title: string
 }
@@ -11,7 +11,7 @@ interface Card {
 export default function ImageCard ({
   url,
   title
-}: Card) {
+}: CardProps) {
   const [isLoad, setIsLoad] = useState(false)
   const imageRef = useRef<HTMLImageElement | null>(null)
 
@@ -22,9 +22,20 @@ export default function ImageCard ({
   }
 
   return (
-    <Card className="flex flex-col space-y-3 max-w-lg	w-full overflow-hidden">
+    <Card className={
+      cn(
+        'image-card',
+        'flex flex-col space-y-3 max-w-lg	w-full overflow-hidden'
+      )
+    }>
       <div
-        className={cn('blured', 'bg-no-repeat', 'bg-cover', { 'loaded': isLoad })}
+        className={
+          cn(
+            'blured',
+            'bg-no-repeat bg-cover',
+            { 'loaded': isLoad }
+          )
+        }
         style={{ backgroundImage: `url('/small/${title}')` }}
       >
         <img
@@ -32,7 +43,7 @@ export default function ImageCard ({
           ref={imageRef}
           src={url}
           alt={title}
-          className={cn('w-full', 'aspect-square', 'block', 'opacity-0')}
+          className={cn('w-full aspect-square block opacity-0')}
           loading="lazy"
         />
       </div>

@@ -1,3 +1,5 @@
+import Tab from '@/app/ui/Tab'
+
 export default function Page() {
-  return <p>Info Page</p>
+  return <Tab />
 }
