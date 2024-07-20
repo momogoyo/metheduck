@@ -8,6 +8,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
+import { cn } from '@/scripts/utils'
 
 const links = [
   { name: 'Info', href: '/info' },
@@ -22,7 +23,7 @@ export default function Gnb() {
         {links.map((link) => (
           <NavigationMenuItem key={link.name}>
             <Link href={link.href} legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), 'bg-background/0')}>
                 {link.name}
               </NavigationMenuLink>
             </Link>

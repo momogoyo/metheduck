@@ -1,6 +1,6 @@
 'use client'
 
-import '@/app/ui/gallery/styles.css'
+import styles from '@/app/gallery/gallery.module.css'
 import {
   useState,
   useEffect,
@@ -82,13 +82,13 @@ export default function Page() {
   }, [isIntersecting, hasMore])
 
   return (
-    <div className={cn('wrapper')}>
+    <div className={cn(styles.wrapper)}>
       {isError ? (
         <div>Error...</div>
       ) : isInitialFetch ? (
         <div>Loading...</div>
       ) : (
-        <div className={cn('gallery')}>
+        <div className={cn(styles.gallery)}>
           {images.map(({ title, url }, index)  => (
             <ImageCard
               key={index}

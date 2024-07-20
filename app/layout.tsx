@@ -16,7 +16,7 @@ export default function RootLayout({
         <div className="relative flex min-h-screen flex-col bg-background">
           <Header />
 
-          <main className="container flex-1 py-6">
+          <main className="flex-1">
             {children}
           </main>
         </div>

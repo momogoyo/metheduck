@@ -1,3 +1,3 @@
 export default function layout({ children }: { children: React.ReactNode }) {
-  return <div className="py-6">{children}</div>
+  return <div className="containerpy-6">{children}</div>
 }
