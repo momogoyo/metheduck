@@ -16,7 +16,7 @@ export async function GET (request: NextRequest) {
   const images = imageFiles.map((fileName, index) => {
     return {
       id: index,
-      url: `/images/${fileName}`,
+      url: `/compress/${fileName}`,
       title: fileName
     }
   })

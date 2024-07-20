@@ -1,0 +1,40 @@
+.wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #c0c0c0 0%, #404040 100%);
+  margin-top: -3.5rem;
+}
+
+.title {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 50px;
+  letter-spacing: 8px;
+}
+
+.title span {
+  background: -webkit-linear-gradient(#4b5462, #2c3440);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  height: calc(100% + 300px);
+}
+
+.hero img {
+  width: 70vw;
+  max-width: 600px;
+}

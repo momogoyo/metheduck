@@ -1,3 +1,9 @@
+import Hero from '@/app/ui/Hero'
+
 export default function Page() {
-  return <p>Main Page</p>
+  return (
+    <div className="main">
+      <Hero />
+    </div>
+  )
 }
