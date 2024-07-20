@@ -10,8 +10,6 @@ import { cn } from '@/scripts/utils'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import ImageCard from '@/app/ui/ImageCard'
 
-// import { Card } from '@/components/ui/card'
-
 type ImageProps = {
   id: number
   url: string
@@ -27,6 +25,7 @@ export default function Page() {
   const [hasMore, setHasMore] = useState(false)
   const [isError, setIsError] = useState(false)
   const [isInitialFetch, setIsInitialFetch] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
   const pageRef = useRef(1)
 
   const [targetRef, isIntersecting] = useIntersectionObserver({ threshold: 1 })
@@ -68,27 +67,22 @@ export default function Page() {
   }
 
   useEffect(() => {
-    fetchImages({ page: pageRef.current })
+    if (!isFetching) {
+      fetchImages({ page: pageRef.current })
+      
+      setIsFetching(false)
+    }
   }, [])
 
   useEffect(() => {
     if (hasMore && isIntersecting) {
       pageRef.current += 1
-      
       fetchImages({ page: pageRef.current })
     }
   }, [isIntersecting, hasMore])
 
   return (
     <div className={cn('wrapper')}>
-      {/* <div className={cn('box')}>
-        <img src="compress/IMG_01.JPG" alt="image" />
-      </div>
-
-      <div className={cn('box', 'pixel')}>
-        <img src="small/IMG_01.JPG" alt="pixel image" />
-      </div> */}
-
       {isError ? (
         <div>Error...</div>
       ) : isInitialFetch ? (

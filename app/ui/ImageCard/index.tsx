@@ -18,15 +18,12 @@ export default function ImageCard ({
 
   const onLoad = () => {
     if (imageRef.current?.complete) {
-      setTimeout(() => {
-
-        setIsLoad(true)
-      }, 250)
+      setIsLoad(true)
     }
   }
 
   return (
-    <Card className={cn('flex', 'flex-col', 'space-y-3', 'max-w-lg', 'w-full', 'overflow-hidden')}>
+    <Card className={cn('flex', 'flex-col', 'items-center', 'space-y-3', 'max-w-lg', 'w-full', 'overflow-hidden')}>
       <div className={cn(styles.box, { [styles.pixel]: !isLoad })}>
         <img
           src={`/small/${title}`}

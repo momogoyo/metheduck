@@ -6,7 +6,7 @@ import {
 
 export const useIntersectionObserver = (options?: IntersectionObserverInit) => {
   const [isIntersecting, setIsIntersecting] = useState(false)
-  const targetRef = useRef<HTMLElement>(null)
+  const targetRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -28,5 +28,6 @@ export const useIntersectionObserver = (options?: IntersectionObserverInit) => {
   return [
     targetRef,
     isIntersecting
-  ]
+  ] as const
+  // as const: 반환된 타입과 값을 고정할 수 있다. (튜플처럼)
 }
