@@ -8,6 +8,7 @@
   "rules": {
     "no-undef": "off",
     "spaced-comment": "off",
-    "tailwindcss/classnames-order": "off"
+    "tailwindcss/classnames-order": "off",
+    "eol-last": "off"
   }
 }
