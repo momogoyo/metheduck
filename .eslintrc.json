@@ -5,10 +5,14 @@
     "plugin:tailwindcss/recommended",
     "prettier"
   ],
+  "plugins": ["prettier"],
   "rules": {
     "no-undef": "off",
     "spaced-comment": "off",
     "tailwindcss/classnames-order": "off",
-    "eol-last": "off"
+    "eol-last": "off",
+    "prettier/prettier": ["error", {
+      "semi": false
+    }]
   }
 }
